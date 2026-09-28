@@ -1,74 +1,96 @@
-/* Project Standards:
-- Logging standards
-- Naming standards:
-function, method, variable = CAMEL
-class => PASCAL folder => KEBAB css => SNAKE
-- Error handling standards
+/*
+Project Standards:
+  -- Logging Standards
+  -- Naming Standards
+        function,method ,variable=> Camel Case 
+        class => Pascal case              
+        folder=>KEBAB
+        css=>SNAKE CASE
+  -- Error handling
+      
 */
+/* Rest api
+   graph api
+   traditional api
+ */
 
-/* 
-Traditinal Api
-Rest Api
-GraphQL Api
-...
-*/
+// O-TASK
 
-
-
-
-
-
-
-
-
-
-
-
-// M TASK
-
-// function getSquareNumbers(arr: number[]){
-//     let result: { number: number; square: number }[] = [];
-//     for (let i = 0; i < arr.length; i++) {
-//        let number = arr[i];
-//         let square = number * number;
-//        result.push({ number, square });
-
-       
+// const calculateSumOfNumbers = (array: any[]) => {
+//   let i = 0;
+//   let result = 0;
+//   for (i; i < array.length; i++) {
+//     const save = typeof array[i];
+//     if (save === "number") {
+//       result += array[i];
 //     }
-//     return result;
-// }
+//   }
+//   return result;
+// };
 
-// console.log(getSquareNumbers([1, 2, 3, 4, 5])); 
+// console.log(calculateSumOfNumbers([10, "10", { son: 10 }, true, 35]));
 
-//N-TASK
+// N-TASK
 
-// Shunday function yozing, u string qabul qilsin va string palindrom yani togri oqilganda ham, 
-// orqasidan oqilganda ham bir hil oqiladigan soz ekanligini aniqlab boolean qiymat qaytarsin. 
-// MASALAN: palindromCheck("dad") return true; palindromCheck("son") return false.
-
-// function palindromCheck(str: string): boolean {
-//     const reversedStr = str.split("").reverse().join("");
-//     return str === reversedStr;
-// }
+// const palindromCheck = (str: string): boolean => {
+//   const reversedStr = str.split("").reverse().join("");
+//   return str === reversedStr;
+// };
 
 // console.log(palindromCheck("dad")); // true
-// console.log(palindromCheck("son")); // false    
+// console.log(palindromCheck("son")); // false
 
-// O TASK
+// const palindromeCheck = (str: string) => {
+//   let result = "";
 
-function calculateSumOfNumbers(arr: any[]): number {
-    let sum = 0;
+//   for (let i = 0; i < str.length; i++) {
+//     result = str[i] + result;
+//   }
 
-    for (const value of arr) {
-        if (typeof value === "number") {
-            sum += value;
-        }
-    }
+//   console.log("before:", str);
+//   console.log("after:", result);
+//   console.log("Result:", str === result);
+// };
 
-    return sum;
-}
+// palindromeCheck("dad");
 
-console.log(
-    calculateSumOfNumbers([10, "10", { son: 10 }, true, 35]) //45 
-);
+// M-TASK
 
+// interface type_array {
+//   number: number;
+//   square: number;
+// }
+
+// const getSquareNumbers = (array: number[]): type_array[] => {
+//   const result: type_array[] = [];
+//   let i = 0;
+//   for (i; i < array.length; i++) {
+//     let num = array[i];
+//     let square = num * num;
+
+//     let obj: type_array = {
+//       number: num,
+//       square: square,
+//     };
+
+//     result[i] = obj;
+//   }
+
+//   return result;
+// };
+
+// console.log(getSquareNumbers([1, 2, 3]));
+
+const obj = { a: 10, b: 20 };
+
+const objectToArray = (obj: any) => {
+  let result = [];
+
+  for (const key of Object.keys(obj)) {
+    result.push([key, obj[key]]);
+  }
+
+  return result;
+};
+
+console.log(objectToArray(obj));

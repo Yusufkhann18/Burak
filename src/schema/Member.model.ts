@@ -1,62 +1,49 @@
-import mongoose,{Schema} from "mongoose";
-import { MemberType } from "../libs/enums/member.enum";
-import { MemberStatus } from "../libs/enums/member.enum";
-
-
+import mongoose, { Schema } from "mongoose";
+import { MemberStatus, MemberType } from "../libs/enums/member.enums";
 import { Member } from "../libs/types/member";
 
-const memberSchema = new Schema<Member>({
-    memberType:{ 
-        type: String,
-        enum: MemberType,
-        default: MemberType.USER,
+const memberSchema = new Schema<Member>(
+  {
+    memberType: {
+      type: String,
+      enum: MemberType,
+      default: MemberType.USER,
     },
-
-    memberStatus:{
-        type: String,
-        enum: MemberStatus,
-        default: MemberStatus.ACTIVE,
-       
+    memberStatus: {
+      type: String,
+      enum: MemberStatus,
+      default: MemberStatus.ACTIVE,
     },
-
-     memberNick:{
-        type: String,
-        index: {unique: true, sparse: true},
-        required: true,
+    memberNick: {
+      type: String,
+      index: { unique: true, sparse: true },
+      required: true,
     },
-
-     memberPhone:{
-        type: String,
-        index: {unique: true, sparse: true},
-        required: true,
+    memberPhone: {
+      type: String,
+      index: { unique: true, sparse: true },
+      required: true,
     },
-
-    memberPassword:{
-        type: String,
-        select: false,
-        required: true,
+    memberPassword: {
+      type: String,
+      required: true,
+      select: false,
     },
-
-    memberAddress:{
-        type: String,
+    memberAddress: {
+      type: String,
     },
-
-     memberDesc:{
-        type: String,
+    memberDesc: {
+      type: String,
     },
-
-     memberImage:{
-        type: String,
+    memberImage: {
+      type: String,
     },
-
-     memberPoints:{
-        type: Number,
-        default: 0,
+    memberPoint: {
+      type: Number,
+      default: 0,
     },
-},
-
-{timestamps: true} // UpdatedAt and CreatedAt fields will be automatically added to the schema
-
+  },
+  { timestamps: true },
 );
 
-export default mongoose.model("Member", memberSchema);
+export default mongoose.model<Member>("Member", memberSchema);
