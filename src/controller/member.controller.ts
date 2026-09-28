@@ -1,8 +1,18 @@
 import { Request, Response } from "express";
-import { T } from "../types/common";
+import { T } from "../libs/types/common";
 
 const memberController: T = {};
 
-// REACT
+memberController.goHome = (req: Request, res: Response) => {
+    res.send("Home page");
+};
+
+memberController.getLogin = (req: Request, res: Response) => {
+    res.send("Login page");
+};
+
+memberController.getSignup = (req: Request, res: Response) => {
+    res.send("Signup page");
+};
 
 export default memberController;
