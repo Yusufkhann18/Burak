@@ -13,21 +13,6 @@ Project Standards:
    graph api
    traditional api
  */
-// P-TASK
-
-const obj = { a: 10, b: 20 };
-
-const objectToArray = (obj: any) => {
-  let result = [];
-
-  for (const key of Object.keys(obj)) {
-    result.push([key, obj[key]]);
-  }
-
-  return result;
-};
-
-console.log(objectToArray(obj));
 
 // O-TASK
 
@@ -44,6 +29,22 @@ console.log(objectToArray(obj));
 // };
 
 // console.log(calculateSumOfNumbers([10, "10", { son: 10 }, true, 35]));
+
+// P-TASK
+
+// const obj = { a: 10, b: 20 };
+
+// const objectToArray = (obj: any) => {
+//   let result = [];
+
+//   for (const key of Object.keys(obj)) {
+//     result.push([key, obj[key]]);
+//   }
+
+//   return result;
+// };
+
+// console.log(objectToArray(obj));
 
 // N-TASK
 
@@ -95,3 +96,12 @@ console.log(objectToArray(obj));
 // };
 
 // console.log(getSquareNumbers([1, 2, 3]));
+
+//Q-task
+
+function hasProperty(obj: object, key: string): boolean {
+  return Object.prototype.hasOwnProperty.call(obj, key);
+}
+
+console.log(hasProperty({ name: "BMW", model: "M3" }, "model")); // true
+console.log(hasProperty({ name: "BMW", model: "M3" }, "year")); // false
