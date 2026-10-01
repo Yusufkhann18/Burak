@@ -15,7 +15,7 @@ app.use(morgan(MORGAN_FORMAT));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 /* 4.routers */
-app.use("/admin", routerAdmin); //EJS
+app.use("/admin", routerAdmin); //SSR
 app.use("/", router); // SPA
 
 export default app;

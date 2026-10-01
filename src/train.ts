@@ -13,6 +13,21 @@ Project Standards:
    graph api
    traditional api
  */
+// P-TASK
+
+const obj = { a: 10, b: 20 };
+
+const objectToArray = (obj: any) => {
+  let result = [];
+
+  for (const key of Object.keys(obj)) {
+    result.push([key, obj[key]]);
+  }
+
+  return result;
+};
+
+console.log(objectToArray(obj));
 
 // O-TASK
 
@@ -80,17 +95,3 @@ Project Standards:
 // };
 
 // console.log(getSquareNumbers([1, 2, 3]));
-
-const obj = { a: 10, b: 20 };
-
-const objectToArray = (obj: any) => {
-  let result = [];
-
-  for (const key of Object.keys(obj)) {
-    result.push([key, obj[key]]);
-  }
-
-  return result;
-};
-
-console.log(objectToArray(obj));
