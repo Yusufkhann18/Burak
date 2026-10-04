@@ -10,13 +10,14 @@ export enum HttpCode {
 }
 
 export enum Message {
-  SOMETHING_WENT_WRONG = "Kutilmagan xatolik yuz berdi. Iltimos, qayta urinib ko‘ring.",
-  NO_DATA_FOUND = "So‘ralgan ma’lumot topilmadi.",
-  CREATE_FAILED = "Yaratish amalga oshmadi. Iltimos, ma’lumotlarni tekshiring.",
-  UPDATE_FAILED = "Ma’lumotlarni yangilab bo‘lmadi. Iltimos, qayta urinib ko‘ring.",
-  NO_MEMBER_NICK = "Bu foydalanuvchi nomi bilan hisob topilmadi.",
-  USED_NICK_PHONE = "Bu foydalanuvchi nomi yoki telefon raqami avval ro‘yxatdan o‘tgan.",
-  WRONG_PASSWORD = "Parol noto‘g‘ri. Iltimos, qayta kiriting.",
+  SOMETHING_WENT_WRONG = "Something went wrong!",
+  NO_DATA_FOUND = "No data found!",
+  CREATE_FAILED = "Create failed!",
+  UPDATE_FAILED = "Update failed!",
+  NO_MEMBER_NICK = "No member with that nickname!",
+  USED_NICK_PHONE = "You ara inserting already used nick or phone!",
+  WRONG_PASSWORD = "Wrong password!",
+  NOT_AUTHENTICATED = "You are not authenticated!Please login first.",
 }
 
 class Errors extends Error {

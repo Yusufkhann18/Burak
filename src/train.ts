@@ -1,18 +1,50 @@
-/*
-Project Standards:
-  -- Logging Standards
-  -- Naming Standards
-        function,method ,variable=> Camel Case 
-        class => Pascal case              
-        folder=>KEBAB
-        css=>SNAKE CASE
-  -- Error handling
-      
-*/
-/* Rest api
-   graph api
-   traditional api
- */
+// /*
+// Project Standards:
+//   -- Logging Standards
+//   -- Naming Standards
+//         function,method ,variable=> Camel Case
+//         class => Pascal case
+//         folder=>KEBAB
+//         css=>SNAKE CASE
+//   -- Error handling
+
+// */
+// /* Rest api
+//    graph api
+//    traditional api
+//  */
+// /*
+
+Q - TASK;
+
+const obj = { name: "BMW", model: "M3" };
+const str = "model";
+
+const hasProperty = <T extends object>(obj: T, str: string): boolean => {
+  for (const key of Object.keys(obj)) {
+    if (key === str) {
+      return true;
+    }
+  }
+  return false;
+};
+
+console.log(hasProperty(obj, str));
+
+// P-TASK
+// const obj = { a: 10, b: 20 };
+
+// const objectToArray = (obj: any) => {
+//   let result = [];
+
+//   for (const key of Object.keys(obj)) {
+//     result.push([key, obj[key]]);
+//   }
+
+//   return result;
+// };
+
+// console.log(objectToArray(obj));
 
 // O-TASK
 
@@ -29,22 +61,6 @@ Project Standards:
 // };
 
 // console.log(calculateSumOfNumbers([10, "10", { son: 10 }, true, 35]));
-
-// P-TASK
-
-// const obj = { a: 10, b: 20 };
-
-// const objectToArray = (obj: any) => {
-//   let result = [];
-
-//   for (const key of Object.keys(obj)) {
-//     result.push([key, obj[key]]);
-//   }
-
-//   return result;
-// };
-
-// console.log(objectToArray(obj));
 
 // N-TASK
 
@@ -97,11 +113,11 @@ Project Standards:
 
 // console.log(getSquareNumbers([1, 2, 3]));
 
-//Q-task
+// R-task
 
-function hasProperty(obj: object, key: string): boolean {
-  return Object.prototype.hasOwnProperty.call(obj, key);
+function calculate(str: string): number {
+  return str.split("+").reduce((sum, num) => sum + Number(num), 0);
 }
 
-console.log(hasProperty({ name: "BMW", model: "M3" }, "model")); // true
-console.log(hasProperty({ name: "BMW", model: "M3" }, "year")); // false
+console.log(calculate("1+3")); // 4
+console.log(calculate("10+20+5")); // 35
