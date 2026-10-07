@@ -115,9 +115,21 @@
 
 // R-task
 
-function calculate(str: string): number {
-  return str.split("+").reduce((sum, num) => sum + Number(num), 0);
+// function calculate(str: string): number {
+//   return str.split("+").reduce((sum, num) => sum + Number(num), 0);
+// }
+
+// console.log(calculate("1+3")); // 4
+// console.log(calculate("10+20+5")); // 35
+
+// s-task
+function missingNumber(nums: number[]): number {
+  const n = nums.length;
+  const expectedSum = (n * (n + 1)) / 2;
+  const actualSum = nums.reduce((sum, num) => sum + num, 0);
+
+  return expectedSum - actualSum;
 }
 
-console.log(calculate("1+3")); // 4
-console.log(calculate("10+20+5")); // 35
+console.log(missingNumber([3, 0, 1])); // 2
+console.log(missingNumber([0, 1])); // 2
