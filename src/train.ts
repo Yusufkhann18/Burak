@@ -15,21 +15,21 @@
 //  */
 // /*
 
-Q - TASK;
+// Q - TASK;
 
-const obj = { name: "BMW", model: "M3" };
-const str = "model";
+// const obj = { name: "BMW", model: "M3" };
+// const str = "model";
 
-const hasProperty = <T extends object>(obj: T, str: string): boolean => {
-  for (const key of Object.keys(obj)) {
-    if (key === str) {
-      return true;
-    }
-  }
-  return false;
-};
+// const hasProperty = <T extends object>(obj: T, str: string): boolean => {
+//   for (const key of Object.keys(obj)) {
+//     if (key === str) {
+//       return true;
+//     }
+//   }
+//   return false;
+// };
 
-console.log(hasProperty(obj, str));
+// console.log(hasProperty(obj, str));
 
 // P-TASK
 // const obj = { a: 10, b: 20 };

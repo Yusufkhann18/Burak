@@ -2,5 +2,9 @@
 
 <body>
   <h1>Restoran mahsulotlarini boshqarish</h1>
+  <div><%= member.memberNick %></div>
+  <% products.forEach((value) => { %>
+    <p><%= value.productName %> - <%= value.productSize %></p>
+  <% }) %>
 </body>
 <%- include('includes/footer')%>

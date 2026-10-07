@@ -8,6 +8,7 @@ import session from "express-session";
 import { randomBytes } from "crypto";
 import ConnectMongoDB from "connect-mongodb-session";
 import dotenv from "dotenv";
+import { T } from "./libs/types/common";
 dotenv.config();
 const MongoDBStore = ConnectMongoDB(session);
 const store = new MongoDBStore({
@@ -33,6 +34,11 @@ app.use(
     saveUninitialized: true,
   }),
 );
+app.use(function (req, res, next) {
+  const sessionInstance = req.session as T;
+  res.locals.member = sessionInstance.member;
+  next();
+});
 /* 3.views */
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
