@@ -1,0 +1,25 @@
+
+Project Standards:
+  -- Logging Standards
+  -- Naming Standards
+        function,method ,variable=> Camel Case 
+        class => Pascal case              
+        folder=>KEBAB
+        css=>SNAKE CASE
+  -- Error handling
+
+
+Request     
+     Rest api
+     graph api
+     traditional api
+
+
+Cookies
+     request join
+     self destroy
+
+Validation:
+     Frontend Validation,
+     Backend Validation,
+     Database Validation

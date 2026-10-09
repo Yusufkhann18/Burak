@@ -56,7 +56,7 @@ restaurantController.processSignup = async (
     const message =
       err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
     res.send(
-      `<script>alert('${message}'); window.location.replace('/admin/signup')</script>`,
+      `<script>alert('Welcome back, ${message}!'); window.location.replace('/admin/signup')</script>`,
     );
   }
 };
@@ -78,7 +78,7 @@ restaurantController.processLogin = async (
     const message =
       err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
     res.send(
-      `<script>alert('${message}'); window.location.replace('/admin/login')</script>`,
+      `<script>alert('Welcome back, ${message}!'); window.location.replace('/admin/login')</script>`,
     );
   }
 };
@@ -96,7 +96,7 @@ restaurantController.checkout = async (req: AdminRequest, res: Response) => {
   try {
     if (req.session?.member)
       res.send(
-        `<script>alert('Xush kelibsiz, ${req.session.member.memberNick}!');</script>`,
+        `<script>alert('Welcome back, ${req.session.member.memberNick}!');</script>`,
       );
     else res.send(`<script>alert('${Message.NOT_AUTHENTICATED}');</script>`);
   } catch (err) {
@@ -116,7 +116,7 @@ restaurantController.verifyRestaurant = (
   } else {
     const message = Message.NOT_AUTHENTICATED;
     res.send(
-      `<script>alert('${message}'); window.location.replace('/admin/login')</script>`,
+      `<script>alert('Welcome back, ${message}!'); window.location.replace('/admin/login')</script>`,
     );
   }
 };

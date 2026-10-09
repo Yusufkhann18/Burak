@@ -1,21 +1,42 @@
-// /*
-// Project Standards:
-//   -- Logging Standards
-//   -- Naming Standards
-//         function,method ,variable=> Camel Case
-//         class => Pascal case
-//         folder=>KEBAB
-//         css=>SNAKE CASE
-//   -- Error handling
+// S-TASK
 
-// */
-// /* Rest api
-//    graph api
-//    traditional api
-//  */
-// /*
+// const calculate = (num: number[]): string => {
+//   const sorted: number[] = num.sort((a, b) => a - b);
 
-// Q - TASK;
+//   let result: number[] = [];
+//   let i: number = 0;
+
+//   for (i; i < sorted.length - 1; i++) {
+//     let current: number = sorted[i];
+//     let next: number = sorted[i + 1];
+
+//     for (let a: number = current + 1; a < next; a++) {
+//       result.push(a);
+//     }
+//   }
+
+//   return result.toString();
+// };
+
+// console.log(calculate([5, 0, 1]));
+
+//
+
+// R-task
+// const calculate = (str: string) => {
+//   const splitted = str.split("+");
+//   let result = 0;
+//   console.log(splitted);
+//   for (const i of splitted) {
+//     const num = parseInt(i);
+//     result += num;
+//   }
+//   return result;
+// };
+
+// console.log(calculate("1+3+5223123+7+213231"));
+
+// Q-TASK
 
 // const obj = { name: "BMW", model: "M3" };
 // const str = "model";
@@ -25,6 +46,7 @@
 //     if (key === str) {
 //       return true;
 //     }
+
 //   }
 //   return false;
 // };
@@ -113,23 +135,23 @@
 
 // console.log(getSquareNumbers([1, 2, 3]));
 
-// R-task
+// T-TASK
 
-// function calculate(str: string): number {
-//   return str.split("+").reduce((sum, num) => sum + Number(num), 0);
-// }
+const mergeSortedArrays = (arr1: number[], arr2: number[]) => {
+  const result: number[] = [];
 
-// console.log(calculate("1+3")); // 4
-// console.log(calculate("10+20+5")); // 35
+  for (const ele of arr1) {
+    result.push(ele);
+  }
+  for (const ele of arr2) {
+    result.push(ele);
+  }
 
-// s-task
-function missingNumber(nums: number[]): number {
-  const n = nums.length;
-  const expectedSum = (n * (n + 1)) / 2;
-  const actualSum = nums.reduce((sum, num) => sum + num, 0);
+  result.sort((a, b) => a - b);
 
-  return expectedSum - actualSum;
-}
+  const final = `[${result.join(", ")}]`;
 
-console.log(missingNumber([3, 0, 1])); // 2
-console.log(missingNumber([0, 1])); // 2
+  return final;
+};
+
+console.log(mergeSortedArrays([0, 3, 4, 31], [4, 6, 30]));

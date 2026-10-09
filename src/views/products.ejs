@@ -1,10 +1,12 @@
 <%- include('includes/header')%>
 
 <body>
-  <h1>Restoran mahsulotlarini boshqarish</h1>
-  <div><%= member.memberNick %></div>
-  <% products.forEach((value) => { %>
-    <p><%= value.productName %> - <%= value.productSize %></p>
-  <% }) %>
+  <div>
+    <h1>Restoran mahsulotlarini boshqarish</h1>
+    <div><%=member.memberNick%></div>
+    <%products.map((value,key)=>{%>
+      <p><%=value.productName%> - <%=value.productSize%></p>
+   <%  })%>
+  </div>
 </body>
 <%- include('includes/footer')%>

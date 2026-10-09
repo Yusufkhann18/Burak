@@ -14,6 +14,8 @@ export enum ProductVolume {
 }
 
 export enum ProductStatus {
+  PAUSE = "PAUSE",
+  // Existing schemas still use this name.
   PUASE = "PAUSE",
   PROCESS = "PROCESS",
   DELETE = "DELETE",
