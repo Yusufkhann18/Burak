@@ -39,6 +39,7 @@ restaurantController.processSignup = async (
 ) => {
   try {
     const file = req.file;
+    console.log("asa", req.body);
     if (!file)
       throw new Errors(HttpCode.BAD_REQUEST, Message.SOMETHING_WENT_WRONG);
     const newMember: MemberInput = req.body;
@@ -56,7 +57,7 @@ restaurantController.processSignup = async (
     const message =
       err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
     res.send(
-      `<script>alert('Welcome back, ${message}!'); window.location.replace('/admin/signup')</script>`,
+      `<script>alert('Welcome, ${message}!'); window.location.replace('/admin/signup')</script>`,
     );
   }
 };
@@ -78,7 +79,7 @@ restaurantController.processLogin = async (
     const message =
       err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
     res.send(
-      `<script>alert('Welcome back, ${message}!'); window.location.replace('/admin/login')</script>`,
+      `<script>alert('Welcome , ${message}!'); window.location.replace('/admin/login')</script>`,
     );
   }
 };
@@ -92,6 +93,27 @@ restaurantController.logout = async (req: AdminRequest, res: Response) => {
     res.redirect("/admin");
   }
 };
+restaurantController.getUsers = async (req: Request, res: Response) => {
+  try {
+    console.log("getusers");
+    const result = await memberService.getUsers();
+    res.render("users", { users: result });
+  } catch (error) {
+    console.error("Error  getUsers page:", error);
+    res.redirect("/admin/login");
+  }
+};
+restaurantController.updateChosenUser = async (req: Request, res: Response) => {
+  try {
+    const result = await memberService.updateChosenUser(req.body);
+    res.status(HttpCode.OK).json({ data: result });
+  } catch (err) {
+    console.error("Error  updateChosenUser page:", err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standard.code).json(Errors.standard);
+  }
+};
+
 restaurantController.checkout = async (req: AdminRequest, res: Response) => {
   try {
     if (req.session?.member)

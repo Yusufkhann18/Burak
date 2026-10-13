@@ -1,3 +1,60 @@
+V - TASK;
+
+const countChars = (arr: any) => {
+  const splitted = arr.split("").sort().join("");
+  let result = "";
+  let count = 1;
+  for (let i = 0; i < splitted.length; i++) {
+    if (splitted[i] === splitted[i + 1]) {
+      count++;
+    } else {
+      result += splitted[i] + count;
+      count = 1;
+    }
+  }
+  return result;
+};
+console.log(countChars("Hello"));
+
+// U-task
+
+// const sumOdds = (number: number) => {
+//   let count = 0;
+//   for (let i = 0; i < number; i++) {
+//     if (i % 2 !== 0) {
+//       count++;
+//     }
+//   }
+
+//   return count;
+// };
+// console.log(sumOdds(9));
+
+// T-TASK
+// const mergeSortedArrays = (arr1: number[], arr2: number[]) =>
+//   arr1.concat(arr2).sort((a, b) => a - b);
+
+// // Testing
+// console.log(mergeSortedArrays([0, 3, 4, 31], [4, 6, 30]));
+// const mergeSortedArrays = (arr1: number[], arr2: number[]) => {
+//   const result: number[] = [];
+
+//   for (const ele of arr1) {
+//     result.push(ele);
+//   }
+//   for (const ele of arr2) {
+//     result.push(ele);
+//   }
+
+//   result.sort((a, b) => a - b);
+
+//   const final = `[${result.join(", ")}]`;
+
+//   return final;
+// };
+
+// console.log(mergeSortedArrays([0, 3, 4, 31], [4, 6, 30]));
+
 // S-TASK
 
 // const calculate = (num: number[]): string => {
@@ -134,24 +191,3 @@
 // };
 
 // console.log(getSquareNumbers([1, 2, 3]));
-
-// T-TASK
-
-const mergeSortedArrays = (arr1: number[], arr2: number[]) => {
-  const result: number[] = [];
-
-  for (const ele of arr1) {
-    result.push(ele);
-  }
-  for (const ele of arr2) {
-    result.push(ele);
-  }
-
-  result.sort((a, b) => a - b);
-
-  const final = `[${result.join(", ")}]`;
-
-  return final;
-};
-
-console.log(mergeSortedArrays([0, 3, 4, 31], [4, 6, 30]));

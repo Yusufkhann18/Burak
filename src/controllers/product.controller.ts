@@ -3,7 +3,7 @@ import { T } from "../libs/types/common";
 import { Request, Response } from "express";
 import ProductService from "../model/Product.service";
 import { AdminRequest } from "../libs/types/member";
-import { ProductInput } from "../libs/types/product";
+import { ProductInput, ProductUpdateInput } from "../libs/types/product";
 const productService = new ProductService();
 
 const productController: T = {};
@@ -37,7 +37,7 @@ productController.createNewProduct = async (
     });
     await productService.createNewProduct(data);
     res.send(
-      `<script>alert('Sucessful creation!'); window.location.replace('/admin/product/all')</script>`,
+      `<script>alert('Successful creation!'); window.location.replace('/admin/product/all')</script>`,
     );
   } catch (err) {
     console.error("Error createNewProduct page:", err);
@@ -50,11 +50,19 @@ productController.createNewProduct = async (
   }
 };
 
-productController.updateChosenProduct = async (req: Request, res: Response) => {
+productController.updateChosenProduct = async (
+  req: AdminRequest,
+  res: Response,
+) => {
   try {
     console.log("updateChosenProduct");
     const id = req.params.id;
-    const result = await productService.updateChosenProduct(id, req.body);
+    const data: ProductUpdateInput = req.body;
+    if (req.files?.length) {
+      data.productImages = req.files.map((ele) => ele.path);
+    }
+
+    const result = await productService.updateChosenProduct(id, data);
     res.status(HttpCode.OK).json({ data: result });
   } catch (err) {
     console.error("Error updateChosenProduct page:", err);
