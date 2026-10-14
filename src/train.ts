@@ -1,20 +1,16 @@
-V - TASK;
+// V - TASK;
 
-const countChars = (arr: any) => {
-  const splitted = arr.split("").sort().join("");
-  let result = "";
-  let count = 1;
-  for (let i = 0; i < splitted.length; i++) {
-    if (splitted[i] === splitted[i + 1]) {
-      count++;
-    } else {
-      result += splitted[i] + count;
-      count = 1;
-    }
+function countChars(str: string): Record<string, number> {
+  const result: Record<string, number> = {};
+
+  for (const char of str) {
+    result[char] = (result[char] ?? 0) + 1;
   }
+
   return result;
-};
-console.log(countChars("Hello"));
+}
+
+console.log(countChars("hello"));
 
 // U-task
 
