@@ -118,7 +118,7 @@ restaurantController.checkout = async (req: AdminRequest, res: Response) => {
   try {
     if (req.session?.member)
       res.send(
-        `<script>alert('Welcome back, ${req.session.member.memberNick}!');</script>`,
+        `<script>alert('Welcome, ${req.session.member.memberNick}!');</script>`,
       );
     else res.send(`<script>alert('${Message.NOT_AUTHENTICATED}');</script>`);
   } catch (err) {

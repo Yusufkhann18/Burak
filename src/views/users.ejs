@@ -8,7 +8,7 @@
     <div class="navigation-menu">
       <ul class="nav justify-content-center">
         <li class="nav-item" style="cursor: pointer">
-          <a class="nav-link active" href="/admin/">Home</a>
+          <a class="nav-link active" href="/admin/">Bosh sahifa</a>
         </li>
         <li class="nav-item" style="cursor: pointer">
           <a class="nav-link" href="/admin/signup">SignUp</a>
@@ -20,27 +20,27 @@
     </div>
 
     <div class="users-frame" style="color: #dddddd">
-      <div class="board" style="font-size: 40px">Please login first!</div>
+      <div class="board" style="font-size: 40px">Avval hisobingizga kiring!</div>
     </div>
 
     <% } else { %>
     <div class="navigation-menu">
       <ul class="nav justify-content-center">
         <li class="nav-item" style="cursor: pointer">
-          <a class="nav-link active" href="/admin/">Home</a>
+          <a class="nav-link active" href="/admin/">Bosh sahifa</a>
         </li>
         <li class="nav-item" style="cursor: pointer">
-          <a class="nav-link" href="/admin/product/all">Menu</a>
+          <a class="nav-link" href="/admin/product/all">Mahsulotlar</a>
         </li>
         <li class="nav-item" style="cursor: pointer">
-          <a class="nav-link" href="/admin/user/all">Users</a>
+          <a class="nav-link" href="/admin/user/all">Foydalanuvchilar</a>
         </li>
         <li
           class="nav-item"
           style="cursor: pointer"
-          onclick="return confirm('Do you really want to logout?')"
+          onclick="return confirm('Hisobdan chiqmoqchimisiz?')"
         >
-          <a class="nav-link" href="/admin/logout">Logout</a>
+          <a class="nav-link" href="/admin/logout">Chiqish</a>
         </li>
       </ul>
     </div>
@@ -54,36 +54,38 @@
           <table class="table table-hover table-sm">
             <thead class="thead-light">
               <tr class="thead-light">
-                <th scope="col">No</th>
-                <th scope="col">Name</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Status</th>
+                <th scope="col">T/r</th>
+                <th scope="col">Ism</th>
+                <th scope="col">Telefon</th>
+                <th scope="col">Holat</th>
               </tr>
             </thead>
             <!--  LOOP PRODUCTS: START  -->
+  <% users.map((value, index) => { %>
 
 <tbody style="background: white">
-  <% users.forEach((user, index) => { %>
     <tr>
       <td><%= index + 1 %></td>
-      <td><%= user.memberNick %></td>
-      <td><%= user.memberPhone %></td>
+      <td><%= value.memberNick %></td>
+      <td><%= value.memberPhone %></td>
       <td style="width: 13%">
-        <select class="spec-select member-status">
-          <option value="ACTIVE" <%= user.memberStatus === 'ACTIVE' ? 'selected' : '' %>>
+
+        <select class="spec-select member-status"   id="<%= value._id %>" >
+          <option value="ACTIVE" <%= value.memberStatus === 'ACTIVE' ? 'selected' : '' %>>
             ACTIVE
           </option>
-          <option value="BLOCK" <%= user.memberStatus === 'BLOCK' ? 'selected' : '' %>>
+          <option value="BLOCK" <%= value.memberStatus === 'BLOCK' ? 'selected' : '' %>>
             BLOCK
           </option>
-          <option value="DELETE" <%= user.memberStatus === 'DELETE' ? 'selected' : '' %>>
+          <option value="DELETE" <%= value.memberStatus === 'DELETE' ? 'selected' : '' %>>
             DELETE
           </option>
         </select>
       </td>
     </tr>
-  <% }); %>
 </tbody>
+  <% }); %>
+
             <!--  LOOP PRODUCTS: END  -->
           </table>
         </div>

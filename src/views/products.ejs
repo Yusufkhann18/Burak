@@ -7,20 +7,20 @@
     <div class="navigation-menu">
       <ul class="nav justify-content-center">
         <li class="nav-item" style="cursor: pointer">
-          <a class="nav-link active" href="/admin/">Home</a>
+          <a class="nav-link active" href="/admin/">Bosh sahifa</a>
         </li>
         <li class="nav-item" style="cursor: pointer">
-          <a class="nav-link" href="/admin/product/all">Menu</a>
+          <a class="nav-link" href="/admin/product/all">Mahsulotlar</a>
         </li>
         <li class="nav-item" style="cursor: pointer">
-          <a class="nav-link" href="/admin/user/all">Users</a>
+          <a class="nav-link" href="/admin/user/all">Foydalanuvchilar</a>
         </li>
         <li
           class="nav-item"
           style="cursor: pointer"
-          onclick="return confirm('Do you want to logout?');"
+          onclick="return confirm('Hisobdan chiqmoqchimisiz?');"
         >
-          <a class="nav-link" href="/admin/logout">Logout</a>
+          <a class="nav-link" href="/admin/logout">Chiqish</a>
         </li>
       </ul>
     </div>
@@ -35,34 +35,34 @@
             <thead class="thead-light">
               <tr class="thead-light">
                 <th scope="col">T/r</th>
-                <th scope="col">Product Name</th>
-                <th scope="col">Product Type</th>
-                <th scope="col">Product Volume</th>
-                <th scope="col">Product Price</th>
-                <th scope="col">Product Left Count</th>
-                <th scope="col">Status</th>
+                <th scope="col">Mahsulot nomi</th>
+                <th scope="col">Kategoriya</th>
+                <th scope="col">Hajm</th>
+                <th scope="col">Narx</th>
+                <th scope="col">Qoldiq soni</th>
+                <th scope="col">Holat</th>
               </tr>
             </thead>
        <!-- LOOP PRODUCTS: START -->
 
 <tbody style="background: white">
-  <% products.forEach((product, index) => { %>
+  <% products.map((value, key) => { %>
     <tr>
-      <td><%= index + 1 %></td>
-      <td><%= product.productName %></td>
-      <td><%= product.productCollection %></td>
-      <td><%= product.productVolume %></td>
-      <td><%= product.productPrice %></td>
-      <td><%= product.productLeftCount %></td>
+      <td><%= key + 1 %></td>
+      <td><%= value.productName %></td>
+      <td><%= value.productCollection%> </td>
+      <td><%= value.productCollection === "DRINK" ? value.productVolume : value.productSize %></td>
+      <td><%= value.productPrice %></td>
+      <td><%= value.productLeftCount %></td>
       <td>
         <select
           class="spec-select new-product-status"
-          data-id="<%= product._id %>"
+          id="<%= value._id %>"
         >
 
-.     <option value="PAUSE" <%= product.productStatus === 'PAUSE' ? 'selected' : '' %>>PAUSE</option>
-.     <option value="PROCESS" <%= product.productStatus === 'PROCESS' ? 'selected' : '' %>>PROCESS</option>
-.     <option value="DELETE" <%= product.productStatus === 'DELETE' ? 'selected' : '' %>>DELETE</option>.
+.     <option value="PAUSE" <%= value.productStatus === 'PAUSE' ? 'selected' : '' %>>PAUSE</option>
+.     <option value="PROCESS" <%= value.productStatus === 'PROCESS' ? 'selected' : '' %>>PROCESS</option>
+.     <option value="DELETE" <%= value.productStatus === 'DELETE' ? 'selected' : '' %>>DELETE</option>.
         </select>
       </td>
     </tr>
@@ -75,22 +75,23 @@
             style="align-items: flex-end; margin-bottom: 25px"
           >
             <button class="btn btn-primary" id="process-btn">
-              New Product
+              Yangi mahsulot
             </button>
           </div>
         </div>
         <form
+         onsubmit="return validateForm();"
           action="/admin/product/create"
           method="POST"
           class="dish-container"
           enctype="multipart/form-data"
         >
           <div class="long-input" style="display: flex; align-items: center">
-            <span class="new-dish-txt">NEW PRODUCT DETAIL</span>
+            <span class="new-dish-txt">Yangi mahsulot</span>
           </div>
           <div class="login-input-frame">
             <div class="long-input">
-              <label>Product Name</label>
+              <label>Mahsulot nomi</label>
               <input
                 type="text"
                 placeholder="Name"
@@ -107,7 +108,7 @@
           </div>
           <div class="half-input-frame">
             <div class="half-input">
-              <label>Product Price</label>
+              <label>Narx</label>
               <input
                 type="number"
                 placeholder="Price"
@@ -116,7 +117,7 @@
               />
             </div>
             <div class="half-input">
-              <label>Product Left Counts</label>
+              <label>Qoldiq soni</label>
               <input
                 type="number"
                 placeholder="Counts"
@@ -127,7 +128,7 @@
           </div>
           <div class="half-input-frame">
             <div class="half-input">
-              <label>Product Type</label>
+              <label>Kategoriya</label>
               <select class="product-collection" name="productCollection">
                 <option value="DISH" selected>Dish</option>
                 <option value="SALAD">Salad</option>
@@ -138,7 +139,7 @@
             </div>
 
             <div class="half-input" id="product-collection">
-              <label>Dish Volume</label>
+              <label>O‘lcham</label>
               <select class="product-size" name="productSize">
                 <option value="SMALL">Small</option>
                 <option value="NORMAL" selected>Normal</option>
@@ -148,7 +149,7 @@
             </div>
 
             <div class="half-input" id="product-volume" style="display: none">
-              <label>Drink Volume</label>
+              <label>Ichimlik hajmi</label>
               <select class="product-volume" name="productVolume">
                 <option value="0.5">0,5 liters</option>
                 <option value="1" selected>1 liters</option>
@@ -159,12 +160,12 @@
             </div>
           </div>
           <div class="long-input">
-            <label>Product Description</label>
+            <label>Tavsif</label>
             <textarea name="productDesc" class="product-desc"></textarea>
           </div>
 
           <div class="img-frame">
-            <label>Product Images</label>
+            <label>Mahsulot rasmlari</label>
             <div class="media-frame">
               <div class="upload-img-box">
                 <img src="/img/upload.svg" class="1" id="image-section-1" />
@@ -174,6 +175,7 @@
                   name="productImages"
                   class="image-one"
                   required
+                  onchange="previewFileHandler(this,1)"
                 />
               </div>
               <div class="upload-img-box">
@@ -183,6 +185,8 @@
                   id="file"
                   name="productImages"
                   class="image-two"
+                  onchange="previewFileHandler(this,2)"
+
                 />
               </div>
               <div class="upload-img-box">
@@ -192,6 +196,8 @@
                   id="file"
                   name="productImages"
                   class="image-three"
+                  onchange="previewFileHandler(this,3)"
+
                 />
               </div>
               <div class="upload-img-box">
@@ -201,6 +207,8 @@
                   id="file"
                   name="productImages"
                   class="image-four"
+                  onchange="previewFileHandler(this,4)"
+
                 />
               </div>
               <div class="upload-img-box">
@@ -210,6 +218,8 @@
                   id="file"
                   name="productImages"
                   class="image-five"
+                  onchange="previewFileHandler(this,5)"
+
                 />
               </div>
               <input name="restaurantIid" class="restaurant-id" hidden />
@@ -217,9 +227,9 @@
           </div>
 
           <div class="operation-buttons">
-            <button class="btn btn-danger" id="cancel-btn">Cancel</button>
+            <button class="btn btn-danger" id="cancel-btn">Bekor qilish</button>
             <button type="submit" class="btn btn-primary" id="create-btn">
-              Create
+              Yaratish
             </button>
           </div>
         </form>

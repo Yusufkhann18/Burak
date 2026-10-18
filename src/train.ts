@@ -1,16 +1,54 @@
-// V - TASK;
+// w-task
+function chunkArray<T>(arr: T[], size: number): T[][] {
+  if (!Number.isInteger(size) || size <= 0) {
+    throw new Error("Bo‘lak uzunligi musbat butun son bo‘lishi kerak.");
+  }
 
-function countChars(str: string): Record<string, number> {
-  const result: Record<string, number> = {};
+  const result: T[][] = [];
 
-  for (const char of str) {
-    result[char] = (result[char] ?? 0) + 1;
+  for (let i = 0; i < arr.length; i += size) {
+    result.push(arr.slice(i, i + size));
   }
 
   return result;
 }
 
-console.log(countChars("hello"));
+console.log(chunkArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3));
+// [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10]]
+// V-TASK
+// OBJECT version
+// const countChars = (arr: any) => {
+//   const splitted = arr.split("").sort();
+//   let result: any = {};
+//   let count = 1;
+//   for (let i = 0; i < splitted.length; i++) {
+//     if (splitted[i] === splitted[i + 1]) {
+//       count++;
+//     } else {
+//       result[splitted[i]] = count;
+//       count = 1;
+//     }
+//   }
+//   return result;
+// };
+// console.log(countChars("Hello"));
+
+//  STRIGN VERSION
+// const countChars = (arr: any) => {
+//   const splitted = arr.split("").sort().join("");
+//   let result = "";
+//   let count = 1;
+//   for (let i = 0; i < splitted.length; i++) {
+//     if (splitted[i] === splitted[i + 1]) {
+//       count++;
+//     } else {
+//       result += splitted[i] + count;
+//       count = 1;
+//     }
+//   }
+//   return result;
+// };
+// console.log(countChars("Hello"));
 
 // U-task
 
