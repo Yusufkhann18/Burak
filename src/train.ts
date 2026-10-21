@@ -1,19 +1,49 @@
-// w-task
-function chunkArray<T>(arr: T[], size: number): T[][] {
-  if (!Number.isInteger(size) || size <= 0) {
-    throw new Error("Bo‘lak uzunligi musbat butun son bo‘lishi kerak.");
+// X - task
+function countOccurrences(obj: object, key: string): number {
+  let count = 0;
+
+  for (const [property, value] of Object.entries(obj)) {
+    if (property === key) {
+      count++;
+    }
+
+    if (typeof value === "object" && value !== null) {
+      count += countOccurrences(value, key);
+    }
   }
 
-  const result: T[][] = [];
-
-  for (let i = 0; i < arr.length; i += size) {
-    result.push(arr.slice(i, i + size));
-  }
-
-  return result;
+  return count;
 }
 
-console.log(chunkArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3));
+console.log(
+  countOccurrences(
+    {
+      model: "Bugatti",
+      steer: {
+        model: "HANKOOK",
+        size: 30,
+      },
+    },
+    "model",
+  ),
+); // 2
+
+// w-task
+// function chunkArray<T>(arr: T[], size: number): T[][] {
+//   if (!Number.isInteger(size) || size <= 0) {
+//     throw new Error("Bo‘lak uzunligi musbat butun son bo‘lishi kerak.");
+//   }
+
+//   const result: T[][] = [];
+
+//   for (let i = 0; i < arr.length; i += size) {
+//     result.push(arr.slice(i, i + size));
+//   }
+
+//   return result;
+// }
+
+// console.log(chunkArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3));
 // [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10]]
 // V-TASK
 // OBJECT version
