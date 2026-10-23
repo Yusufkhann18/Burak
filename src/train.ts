@@ -1,32 +1,39 @@
-// X - task
-function countOccurrences(obj: object, key: string): number {
-  let count = 0;
-
-  for (const [property, value] of Object.entries(obj)) {
-    if (property === key) {
-      count++;
-    }
-
-    if (typeof value === "object" && value !== null) {
-      count += countOccurrences(value, key);
-    }
-  }
-
-  return count;
+// Y-task
+function findIntersection(arr1: number[], arr2: number[]): number[] {
+  return [...new Set(arr1)].filter((value) => arr2.includes(value));
 }
 
-console.log(
-  countOccurrences(
-    {
-      model: "Bugatti",
-      steer: {
-        model: "HANKOOK",
-        size: 30,
-      },
-    },
-    "model",
-  ),
-); // 2
+console.log(findIntersection([1, 2, 3], [3, 2, 0])); // [2, 3]
+console.log(findIntersection([1, 2, 2, 3], [2, 3, 4])); // [2, 3]
+// X - task
+// function countOccurrences(obj: object, key: string): number {
+//   let count = 0;
+
+//   for (const [property, value] of Object.entries(obj)) {
+//     if (property === key) {
+//       count++;
+//     }
+
+//     if (typeof value === "object" && value !== null) {
+//       count += countOccurrences(value, key);
+//     }
+//   }
+
+//   return count;
+// }
+
+// console.log(
+//   countOccurrences(
+//     {
+//       model: "Bugatti",
+//       steer: {
+//         model: "HANKOOK",
+//         size: 30,
+//       },
+//     },
+//     "model",
+//   ),
+// ); // 2
 
 // w-task
 // function chunkArray<T>(arr: T[], size: number): T[][] {
