@@ -89,7 +89,7 @@ restaurantController.logout = async (req: AdminRequest, res: Response) => {
       res.redirect("/admin");
     });
   } catch (err) {
-    console.error("Error  processLogin page:", err);
+    console.error("Error  logout page:", err);
     res.redirect("/admin");
   }
 };

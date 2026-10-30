@@ -1,7 +1,12 @@
 import { shapeIntoMongooseObjectId } from "../libs/config";
-import { MemberType } from "../libs/enums/member.enums";
+import { MemberStatus, MemberType } from "../libs/enums/member.enums";
 import Errors, { HttpCode, Message } from "../libs/Error";
-import { LoginInput, Member, MemberInput, MemberUpdateInput } from "../libs/types/member";
+import {
+  LoginInput,
+  Member,
+  MemberInput,
+  MemberUpdateInput,
+} from "../libs/types/member";
 import MemberModel from "../schema/Member.model";
 import * as bcrypt from "bcryptjs";
 class MemberService {
@@ -28,13 +33,20 @@ class MemberService {
   }
   public async login(input: LoginInput): Promise<Member> {
     // TODO: Consider member status later
+
     const member = await this.memberModel
       .findOne(
-        { memberNick: input.memberNick },
-        { memberNick: 1, memberPassword: 1 },
+        {
+          memberNick: input.memberNick,
+          memberStatus: { $ne: MemberStatus.DELETE },
+        },
+        { memberNick: 1, memberPassword: 1, memberStatus: 1 },
       )
       .exec();
     if (!member) throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_NICK);
+    else if (member.memberStatus === MemberStatus.BLOCK) {
+      throw new Errors(HttpCode.FORBIDDEN, Message.BLOCKED_USER);
+    }
     const isMatch = await bcrypt.compare(
       input.memberPassword,
       member.memberPassword,
@@ -45,6 +57,14 @@ class MemberService {
       .findById(member._id)
       .lean()
       .exec()) as Member;
+  }
+  public async getMemberDetail(member: Member): Promise<Member> {
+    const memberId = shapeIntoMongooseObjectId(member._id);
+    const result = await this.memberModel
+      .findOne({ _id: memberId, memberStatus: MemberStatus.ACTIVE })
+      .exec();
+    if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+    return result as Member;
   }
 
   /* SSR */
@@ -57,11 +77,7 @@ class MemberService {
     input.memberPassword = await bcrypt.hash(input.memberPassword, salt);
 
     try {
-      //static method
       const result = await this.memberModel.create(input);
-      //template method
-      // const tempResult = new this.memberModel(input);
-      // const result = await tempResult.save();
       result.memberPassword = "";
       return result;
     } catch (err) {
@@ -82,9 +98,7 @@ class MemberService {
     );
     if (!isMatch)
       throw new Errors(HttpCode.UNAUTHORIZED, Message.WRONG_PASSWORD);
-    return (await this.memberModel
-      .findById(member._id)
-      .exec()) as unknown as Member;
+    return (await this.memberModel.findById(member._id).exec()) as Member;
   }
   public async getUsers(): Promise<Member[]> {
     const result = await this.memberModel

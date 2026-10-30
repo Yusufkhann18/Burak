@@ -1,57 +1,71 @@
-// Y-task
-function findIntersection(arr1: number[], arr2: number[]): number[] {
-  return [...new Set(arr1)].filter((value) => arr2.includes(value));
-}
+// Z-TASK
 
-console.log(findIntersection([1, 2, 3], [3, 2, 0])); // [2, 3]
-console.log(findIntersection([1, 2, 2, 3], [2, 3, 4])); // [2, 3]
-// X - task
-// function countOccurrences(obj: object, key: string): number {
-//   let count = 0;
-
-//   for (const [property, value] of Object.entries(obj)) {
-//     if (property === key) {
-//       count++;
+// const sumEvens = (arr: number[]) => {
+//   let result = 0;
+//   for (const ele of arr) {
+//     if (ele % 2 === 0) {
+//       result += ele;
 //     }
+//   }
+//   return result;
+// };
+// console.log(sumEvens([2, 3, 5, 4, 1]));
 
-//     if (typeof value === "object" && value !== null) {
-//       count += countOccurrences(value, key);
+// Y-TASK
+// const findIntersection = (arr1: number[], arr2: number[]): number[] => {
+//   const result: number[] = [];
+//   const a: number[] = [];
+//   for (const ele of arr1) {
+//     if (arr2.includes(ele)) {
+//       result.push(ele);
 //     }
 //   }
 
-//   return count;
-// }
+//   return result;
+// };
 
+// console.log(findIntersection([1, 2, 3], [3, 2, 0]));
+// // X-task
+
+// const countOccurrences = (obj: any, str: string) => {
+//   let count = 0;
+//   for (const key in obj) {
+//     if (key === str) {
+//       count++;
+//     }
+//     if (typeof obj[key] == "object" && obj[key] !== null) {
+//       for (const key2 in obj[key]) {
+//         if (key2 === str) {
+//           count++;
+//         }
+//       }
+//     }
+//   }
+//   return count;
+// };
 // console.log(
 //   countOccurrences(
 //     {
 //       model: "Bugatti",
-//       steer: {
-//         model: "HANKOOK",
-//         size: 30,
-//       },
+//       steer: { model: "HANKOOK", size: 30 },
+//       door: { model: "HANKOOK", size: 30 },
 //     },
 //     "model",
 //   ),
-// ); // 2
+// );
 
-// w-task
-// function chunkArray<T>(arr: T[], size: number): T[][] {
-//   if (!Number.isInteger(size) || size <= 0) {
-//     throw new Error("Bo‘lak uzunligi musbat butun son bo‘lishi kerak.");
+// // w-TASK
+// const chunkArray = (arr: number[], num: number) => {
+//   const result = [];
+//   for (let i = 0; i <= arr.length; i += num) {
+//     const slice = arr.slice(i, i + num);
+//     result.push(slice);
 //   }
-
-//   const result: T[][] = [];
-
-//   for (let i = 0; i < arr.length; i += size) {
-//     result.push(arr.slice(i, i + size));
-//   }
-
 //   return result;
-// }
+// };
 
 // console.log(chunkArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3));
-// [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10]]
+
 // V-TASK
 // OBJECT version
 // const countChars = (arr: any) => {
@@ -262,3 +276,5 @@ console.log(findIntersection([1, 2, 2, 3], [2, 3, 4])); // [2, 3]
 // };
 
 // console.log(getSquareNumbers([1, 2, 3]));
+
+//     throw new Error("Bo‘lak uzunligi musbat butun son bo‘lishi kerak.");

@@ -1,5 +1,4 @@
 import mongoose, { Schema } from "mongoose";
-import { Member } from "../libs/types/member";
 import {
   ProductCollection,
   ProductSize,
@@ -13,7 +12,7 @@ const productSchema = new Schema<Product>(
     productStatus: {
       type: String,
       enum: ProductStatus,
-      default: ProductStatus.PUASE,
+      default: ProductStatus.PAUSE,
     },
     productCollection: {
       type: String,
