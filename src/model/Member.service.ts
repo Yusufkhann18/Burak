@@ -6,6 +6,7 @@ import {
   Member,
   MemberInput,
   MemberUpdateInput,
+  MemberProfileUpdateInput,
 } from "../libs/types/member";
 import MemberModel from "../schema/Member.model";
 import * as bcrypt from "bcryptjs";
@@ -17,6 +18,56 @@ class MemberService {
   }
 
   /* SPA */
+  public async getRestaurant(): Promise<Member> {
+    const result = await this.memberModel
+      .findOne({ memberType: MemberType.RESTAURANT })
+      .exec();
+    if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+    return result;
+  }
+
+  public async updateMember(
+    member: Member,
+    input: MemberProfileUpdateInput,
+  ): Promise<Member> {
+    const memberId = shapeIntoMongooseObjectId(member._id);
+    const update: MemberProfileUpdateInput = {};
+    const fields = [
+      "memberNick", "memberPhone", "memberAddress", "memberDesc", "memberImage",
+    ] as const;
+    for (const field of fields) {
+      if (input[field] !== undefined) {
+        if (typeof input[field] !== "string")
+          throw new Errors(HttpCode.BAD_REQUEST, Message.UPDATE_FAILED);
+        update[field] = input[field];
+      }
+    }
+    if (input.memberPassword !== undefined) {
+      if (typeof input.memberPassword !== "string" || !input.memberPassword)
+        throw new Errors(HttpCode.BAD_REQUEST, Message.UPDATE_FAILED);
+      update.memberPassword = await bcrypt.hash(input.memberPassword, await bcrypt.genSalt());
+    }
+    if (!Object.keys(update).length)
+      throw new Errors(HttpCode.BAD_REQUEST, Message.UPDATE_FAILED);
+    const result = await this.memberModel
+      .findOneAndUpdate(
+        { _id: memberId, memberStatus: MemberStatus.ACTIVE },
+        { $set: update },
+        { new: true, runValidators: true },
+      )
+      .exec();
+    if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+    return result;
+  }
+
+  public async getTopUsers(): Promise<Member[]> {
+    return this.memberModel
+      .find({ memberStatus: MemberStatus.ACTIVE, memberPoint: { $gte: 1 } })
+      .sort({ memberPoint: -1 })
+      .limit(4)
+      .exec();
+  }
+
   public async signup(input: MemberInput): Promise<Member> {
     const salt = await bcrypt.genSalt();
     input.memberPassword = await bcrypt.hash(input.memberPassword, salt);
