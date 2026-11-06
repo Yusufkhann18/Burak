@@ -1,4 +1,5 @@
 import express from "express";
+import productController from "./controllers/product.controller";
 import memberController from "./controllers/member.controller";
 import makeUploader from "./libs/utils/uploader";
 const router = express.Router();
@@ -25,6 +26,8 @@ router.get(
   memberController.getMemberDetail,
 );
 // Product
+router.get("/product/all", productController.getProducts);
+router.get("/product/:id", memberController.retrieveAuth, productController.getProduct);
 
 // Orders
 export default router;
