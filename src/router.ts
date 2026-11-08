@@ -1,5 +1,6 @@
 import express from "express";
 import productController from "./controllers/product.controller";
+import orderController from "./controllers/order.controller";
 import memberController from "./controllers/member.controller";
 import makeUploader from "./libs/utils/uploader";
 const router = express.Router();
@@ -30,4 +31,7 @@ router.get("/product/all", productController.getProducts);
 router.get("/product/:id", memberController.retrieveAuth, productController.getProduct);
 
 // Orders
+router.post("/order/create", memberController.verifyAuth, orderController.createOrder);
+router.get("/order/all", memberController.verifyAuth, orderController.getMyOrders);
+router.post("/order/update", memberController.verifyAuth, orderController.updateOrder);
 export default router;
