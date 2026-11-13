@@ -11,7 +11,15 @@ router.get("/member/top-users", memberController.getTopUsers);
 router.post(
   "/member/update",
   memberController.verifyAuth,
-  makeUploader("members").single("MemberImage"),
+  makeUploader("members").fields([
+    { name: "memberImage", maxCount: 1 },
+    { name: "MemberImage", maxCount: 1 },
+  ]),
+  (req, res, next) => {
+    const files = req.files as { [field: string]: Express.Multer.File[] } | undefined;
+    req.file = files?.memberImage?.[0] ?? files?.MemberImage?.[0];
+    next();
+  },
   memberController.updateMember,
 );
 router.post("/member/login", memberController.login);

@@ -17,7 +17,7 @@ $(function () {
       })
       $("#cancel-btn").on("click", () => {
             $(".dish-container").slideToggle(200);
-            $("#process-btn").css("display", "none")
+            $("#process-btn").css("display", "flex")
       })
       $(".new-product-status").on("change", async function (e) {
             const id = e.target.id;
@@ -43,7 +43,7 @@ function validateForm() {
       const productName = $(".product-name").val()
             , productPrice = $(".product-price").val()
             , productLeftCount = $(".product-left-count").val()
-            , productCollection = $(".half-innpm run deput").val()
+            , productCollection = $(".product-collection").val()
             , productDesc = $(".product-desc").val()
             , productStatus = $(".product-status").val();
 

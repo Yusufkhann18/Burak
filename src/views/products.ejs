@@ -60,9 +60,9 @@
           id="<%= value._id %>"
         >
 
-.     <option value="PAUSE" <%= value.productStatus === 'PAUSE' ? 'selected' : '' %>>PAUSE</option>
-.     <option value="PROCESS" <%= value.productStatus === 'PROCESS' ? 'selected' : '' %>>PROCESS</option>
-.     <option value="DELETE" <%= value.productStatus === 'DELETE' ? 'selected' : '' %>>DELETE</option>.
+      <option value="PAUSE" <%= value.productStatus === 'PAUSE' ? 'selected' : '' %>>PAUSE</option>
+      <option value="PROCESS" <%= value.productStatus === 'PROCESS' ? 'selected' : '' %>>PROCESS</option>
+      <option value="DELETE" <%= value.productStatus === 'DELETE' ? 'selected' : '' %>>DELETE</option>
         </select>
       </td>
     </tr>
@@ -227,7 +227,7 @@
           </div>
 
           <div class="operation-buttons">
-            <button class="btn btn-danger" id="cancel-btn">Bekor qilish</button>
+            <button type="button" class="btn btn-danger" id="cancel-btn">Bekor qilish</button>
             <button type="submit" class="btn btn-primary" id="create-btn">
               Yaratish
             </button>

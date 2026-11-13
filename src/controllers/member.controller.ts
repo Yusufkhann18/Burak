@@ -50,11 +50,10 @@ memberController.getTopUsers = async (req: Request, res: Response) => {
 
 memberController.signup = async (req: Request, res: Response) => {
   try {
-    console.log("body:", req.body);
+    console.log("signup");
     const input: MemberInput = req.body,
       result: Member = await memberService.signup(input),
       token = await authService.createToken(result);
-    console.log(token);
     res.cookie("accessToken", token, {
       maxAge: AUTH_TIMER * 3600 * 1000,
       httpOnly: false,
@@ -72,7 +71,6 @@ memberController.login = async (req: Request, res: Response) => {
     const input: LoginInput = req.body;
     const result = await memberService.login(input);
     const token = await authService.createToken(result);
-    console.log(token);
     res.cookie("accessToken", token, {
       maxAge: AUTH_TIMER * 3600 * 1000,
       httpOnly: false,

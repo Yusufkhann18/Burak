@@ -83,7 +83,7 @@ productController.createNewProduct = async (
       throw new Errors(HttpCode.INTERNAL_SERVER_ERROR, Message.CREATE_FAILED);
     const data: ProductInput = req.body;
     data.productImages = req.files.map((ele) => {
-      return ele.path;
+      return ele.path.replace(/\\/g, "/");
     });
     await productService.createNewProduct(data);
     res.send(
@@ -109,7 +109,7 @@ productController.updateChosenProduct = async (
     const id = req.params.id;
     const data: ProductUpdateInput = req.body;
     if (req.files?.length) {
-      data.productImages = req.files.map((ele) => ele.path);
+      data.productImages = req.files.map((ele) => ele.path.replace(/\\/g, "/"));
     }
 
     const result = await productService.updateChosenProduct(id, data);

@@ -23,6 +23,7 @@ export interface MemberInput {
   memberPhone: string;
   memberPassword: string;
   memberAdress?: string;
+  memberAddress?: string;
   memberDesc?: string;
   memberImage?: string;
   memberPoint?: number;
@@ -48,6 +49,7 @@ export interface MemberUpdateInput {
   memberPhone?: string;
   memberPassword?: string;
   memberAdress?: string;
+  memberAddress?: string;
   memberDesc?: string;
   memberImage?: string;
 }
