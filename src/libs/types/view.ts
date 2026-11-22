@@ -1,4 +1,5 @@
-import { ObjectId } from "mongoose";
+import { Types } from "mongoose";
+type ObjectId = Types.ObjectId;
 import { ViewGroup } from "../enums/view.enum";
 
 export interface View {

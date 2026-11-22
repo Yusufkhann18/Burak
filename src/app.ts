@@ -11,6 +11,7 @@ import session from "express-session";
 import ConnectMongoDB from "connect-mongodb-session";
 import { T } from "./libs/types/common";
 import cookieParser from "cookie-parser";
+import { clientCors } from "./libs/utils/client-cors";
 const MongoDBStore = ConnectMongoDB(session);
 const store = new MongoDBStore({
   uri: String(process.env.MONGODB_URI),
@@ -18,6 +19,7 @@ const store = new MongoDBStore({
 });
 /* 1.Entrance */
 const app = express();
+app.use(clientCors());
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/uploads", express.static(path.join(__dirname, "..", "uploads")));
 app.use(express.urlencoded({ extended: true }));

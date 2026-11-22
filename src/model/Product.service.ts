@@ -1,4 +1,5 @@
-import { ObjectId } from "mongoose";
+import { Types } from "mongoose";
+type ObjectId = Types.ObjectId;
 import { ProductStatus } from "../libs/enums/product.enum";
 import { ProductInquiry } from "../libs/types/product";
 import { T } from "../libs/types/common";

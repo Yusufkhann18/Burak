@@ -12,6 +12,7 @@ import MemberService from "../model/Member.service";
 import Errors, { HttpCode, Message } from "../libs/Error";
 import AuthService from "../model/Auth.service";
 import { AUTH_TIMER } from "../libs/config";
+import { extractAccessToken } from "../libs/utils/auth-token";
 const memberService = new MemberService();
 const authService = new AuthService();
 //React
@@ -51,8 +52,10 @@ memberController.getTopUsers = async (req: Request, res: Response) => {
 memberController.signup = async (req: Request, res: Response) => {
   try {
     console.log("signup");
-    const input: MemberInput = req.body,
-      result: Member = await memberService.signup(input),
+    const input: MemberInput = { ...req.body };
+    const image = req.file?.path;
+    if (image) input.memberImage = image.replace(/\\/g, "/");
+    const result: Member = await memberService.signup(input),
       token = await authService.createToken(result);
     res.cookie("accessToken", token, {
       maxAge: AUTH_TIMER * 3600 * 1000,
@@ -117,8 +120,7 @@ memberController.verifyAuth = async (
   next: NextFunction,
 ) => {
   try {
-    const token = req.cookies?.["accessToken"] ||
-      req.headers.authorization?.match(/^Bearer\s+(\S+)$/i)?.[1];
+    const token = extractAccessToken(req);
     if (token) req.member = await authService.checkAuth(token);
     if (!req.member)
       throw new Errors(HttpCode.UNAUTHORIZED, Message.NOT_AUTHENTICATED);
@@ -141,7 +143,7 @@ memberController.retrieveAuth = async (
   next: NextFunction,
 ) => {
   try {
-    const token = req.cookies["accessToken"];
+    const token = extractAccessToken(req);
     if (token) req.member = await authService.checkAuth(token);
     next();
   } catch (err) {

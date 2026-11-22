@@ -23,7 +23,11 @@ router.post(
   memberController.updateMember,
 );
 router.post("/member/login", memberController.login);
-router.post("/member/signup", memberController.signup);
+router.post(
+  "/member/signup",
+  makeUploader("members").single("memberImage"),
+  memberController.signup,
+);
 router.post(
   "/member/logout",
   memberController.verifyAuth,
